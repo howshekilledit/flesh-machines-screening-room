@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://howshekilledit.com/poetcyborg/fastdict.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>read the dict</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <script async="" src="./read the dict_files/analytics.js"></script><script src="./read the dict_files/bubbler-one"></script>
+<script src="./read the dict_files/jquery.min.js"></script>
+
+<script src="./read the dict_files/censor.js"></script>
+
+<style type="text/css">
+	#wordspace{font-family: chivo, sans-serif;}
+</style>
+
+    <link rel="icon" type="image/png" href="https://howshekilledit.com/expanded-field/favicon.png">
+    
+</head>
+
+<body>
+<div id="wordspace" style="width:936px; height: 288px; margin:auto;font-size:80px;background-color:black; ; padding-left:40px" align="left"><br><span style="color:rgb(10,197,148)">ambiguity</span></div>
+<div id="test"></div>
+<script type="text/javascript">
+
+$(document).ready( function(){ 
+	var allwordshtml = []; 
+	var ind; 
+	var r;
+	var g;
+	var b; 
+	var htmlword; 
+	var allwords = ""; 
+	for(var i = 0; i < dictionary.length; i++){
+		if(dictionary[i].indexOf(' ') == -1){
+		r = Math.floor(Math.random()*256); 
+		//alert(r); 
+		g = Math.floor(Math.random()*256); 
+		b = Math.floor(Math.random()*256);
+		htmlword = "<br/><span style = 'color:rgb(" + r + "," + g + "," + b + ")'>" + dictionary[i] + "</span>"; 	
+		allwordshtml.push(htmlword); 
+		}
+	}
+	var j = Math.floor(Math.random()*dictionary.length); 
+	console.log(dictionary.indexOf('daughter'));
+	setInterval(function(){$('#wordspace').html(allwordshtml[j%dictionary.length]); j++;}, 1); 
+});
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-37181727-2', 'greenmorgan.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body></html>
