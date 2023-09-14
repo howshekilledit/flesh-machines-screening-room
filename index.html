@@ -78,9 +78,9 @@
                 //update title card for next round
                 title.innerHTML = artworks[i].title;
                 description.innerHTML = artworks[i].desc;
-              
+                iframe.src = artworks[i].url;
                 setTimeout(function () {
-                    iframe.src = artworks[i].url;
+                    
                    
                     //hide label
                     label.style.display = 'none';
