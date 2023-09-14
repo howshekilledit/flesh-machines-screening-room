@@ -79,14 +79,15 @@
                 title.innerHTML = artworks[i].title;
                 description.innerHTML = artworks[i].desc;
                 iframe.src = artworks[i].url;
+                i = (i + 1) % artworks.length;
                 setTimeout(function () {
                     
                    
                     //hide label
                     label.style.display = 'none';
                       //show iframe
-                      iframe.style.display = 'block';
-                    i = (i + 1) % artworks.length;
+                    iframe.style.display = 'block';
+                    
                     
 
                 }, title_card_rt);

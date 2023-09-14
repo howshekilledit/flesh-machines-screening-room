@@ -4,7 +4,7 @@
 
 <title>read the dict</title>
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <script async="" src="./read the dict_files/analytics.js"></script><script src="./read the dict_files/bubbler-one"></script>
+<script src="./read the dict_files/bubbler-one"></script>
 <script src="./read the dict_files/jquery.min.js"></script>
 
 <script src="./read the dict_files/censor.js"></script>
@@ -32,10 +32,16 @@ $(document).ready( function(){
 	var allwords = ""; 
 	for(var i = 0; i < dictionary.length; i++){
 		if(dictionary[i].indexOf(' ') == -1){
-		r = Math.floor(Math.random()*256); 
-		//alert(r); 
-		g = Math.floor(Math.random()*256); 
-		b = Math.floor(Math.random()*256);
+		if(Math.random() < 0.1){
+			r = Math.floor(Math.random()*256); 
+			//alert(r); 
+			g = Math.floor(Math.random()*256); 
+			b = Math.floor(Math.random()*256);
+		} else {
+			r = Math.floor(Math.random()*256); 
+			g = r; 
+			b = r;
+		}
 		htmlword = "<br/><span style = 'color:rgb(" + r + "," + g + "," + b + ")'>" + dictionary[i] + "</span>"; 	
 		allwordshtml.push(htmlword); 
 		}
@@ -46,16 +52,6 @@ $(document).ready( function(){
 });
 </script>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-37181727-2', 'greenmorgan.com');
-  ga('send', 'pageview');
-
-</script>
 
 
 </body></html>
