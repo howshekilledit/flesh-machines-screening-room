@@ -46,9 +46,8 @@ $(document).ready( function(){
 		allwordshtml.push(htmlword); 
 		}
 	}
-	var j = Math.floor(Math.random()*dictionary.length); 
-	//var j = 220000;
-	setInterval(function(){$('#wordspace').html(allwordshtml[j%dictionary.length]); j++;}, 1); 
+	var j = Math.floor(Math.random()*allwordshtml.length); 
+	setInterval(function(){$('#wordspace').html(allwordshtml[j%allwordshtml.length]); j++;}, 1); 
 });
 </script>
 
