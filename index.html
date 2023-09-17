@@ -55,18 +55,24 @@
         <h1 id="title">Untitled</h1>
         <p id = "description">digital animation, 2018</p>
     </div>
-    <iframe src="ud.html" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto">
+    <iframe src="refuse.html" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto" controls = "false">
     </iframe>
     <script>
         artworks = [
             { url: 'sc.html', title: "Slippery Characters", desc: "live-generating animation, 2020"},
             { url: 'sc_2019', title: "Slippery Characters", desc: "live-generating animation, 2019"}, 
             { url: 'ud.html', title: "Untitled", desc: "live-generating animation, 2018"} ,
+            { url: 'refuse.html', title: "escaped refuse", desc: "digital video, 2018"} ,
+
         ]
-        var interval = 1000 * 60 * 6.1; //sets interval for switching artworks 
+        var interval = 1000 * 80 + 4000; //sets interval for switching artworks 
         //interval = 5000;
         //var interval = 10000; 
         var iframe = document.querySelector('iframe');
+        //play iframe video
+    
+        //hide iframe controls
+        iframe.controls = false;
         var title_card_rt = 4000; //sets time for title card to be displayed
         //toggle iframe src every 10 seconds
         var i = 0;

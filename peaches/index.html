@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peaches</title>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <script src = "wils.js"></script>
+    <style>
+        #text{
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            text-align: left;
+            margin-top: 20%;
+            margin-left: 20%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id = "text">
+        <p id = "l1"></p>
+        <p id = "l2"></p>
+    </div>
+    <script>
+        let interval = 2000;
+        var cplt = cplts[Math.floor(Math.random() * cplts.length)];
+        var text = document.getElementById("text");
+        cplt.l2 = cplt.l2.replace(/ /g, "&nbsp;");
+        //cplt.l2 = cplt.l2.replace(' ', "&nbsp;");
+        let l1 = document.getElementById("l1");
+        let l2 = document.getElementById("l2");
+        
+        l1.innerHTML = cplt.l1;
+        l2.innerHTML = cplt.l2;
+        let disp = l2;
+    setInterval( function(){
+        
+        //couplets that have any word in l1 in common with the current couplet
+        let l1_matches = cplts.filter(c => (c.l1.split(" ").some(w => cplt.l1.split(" ").includes(w)) && (c.l1 != cplt.l1) ));
+        let cplt_1, cplt_2;
+        let nxt_options = [];
+        if(l1_matches.length>0){
+            cplt_1 = l1_matches[Math.floor(Math.random() * l1_matches.length)];
+        } else {
+            cplt_1 = NaN; //if there are no matches, set cplt_1 to None
+        }
+        //couplets that have the same word in l2 as the current couplet
+        let l2_matches = cplts.filter(c => (c.w == cplt.w) && (c.l1 != cplt.l1));
+        if(l1_matches.length>0){
+            cplt_2 = l2_matches[Math.floor(Math.random() * l2_matches.length)];
+        } else {
+            cplt_2 = NaN; //if there are no matches, set cplt_2 to None
+        }
+        
+        //cplt.l2 = cplt.l2.replace(' ', "&nbsp;");
+        options = [cplt_1, cplt_2].filter(c => c != NaN);
+        if(options.length == 0){
+            options = cplts.filter(c => c.l1 != cplt.l1);
+        }
+        l_cplt = cplt; //save current couplet
+        
+        cplt = options[Math.floor(Math.random() * options.length)];
+        if(cplt_1.l1 == cplt.l1){
+            disp = l2;
+            keep = l1; 
+        } else {
+            disp = l1;
+            keep = l2;
+        }
+        cplt.l2 = cplt.l2.replace(/ /g, "&nbsp;");
+
+        setTimeout(function(){
+            l1.innerHTML = cplt.l1;
+            l2.innerHTML = cplt.l2;
+            setTimeout(function(){
+                l1.innerHTML = l_cplt.l1;
+            }, interval/3);
+            disp.style.visibility = 'visible';
+
+        }, interval/3);
+        disp.style.visibility = 'hidden';
+
+    }, interval); 
+    </script>
+</body>
+    
+</html>
