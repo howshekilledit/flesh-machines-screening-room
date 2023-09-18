@@ -11,7 +11,7 @@
             font-size: 20px;
             text-align: left;
             margin-top: 20%;
-            margin-left: 20%;
+   
         }
         p{
             margin: 0px;
@@ -25,19 +25,19 @@
         <p id = "l2"></p>
     </div>
     <script>
-        let interval = 4000;
+        let interval = 8000;
         var cplt = cplts[Math.floor(Math.random() * cplts.length)];
         var text = document.getElementById("text");
-        cplt.l2 = cplt.l2.replace(/ /g, "&nbsp;");
+        cplt.l2 = cplt.l2.replace(/ /g, "-");
         //cplt.l2 = cplt.l2.replace(' ', "&nbsp;");
         let l1 = document.getElementById("l1");
         let l2 = document.getElementById("l2");
         //add n_spaces to each side of l1 and l2 using string literal
-        let n_spaces = 10;
+        let n_spaces = 20;
         let s = "-".repeat(n_spaces);
-        l1.innerHTML = s+cplt.l1+s;
-        l2.innerHTML = s+cplt.l2+s;
-        let disp = l2;
+        l1.innerHTML = (s+cplt.l1+s).replaceAll("-", '&nbsp;');
+        l2.innerHTML = (s+cplt.l2+s).replaceAll("-", '&nbsp;');
+        let disp, keep; 
     setInterval( function(){
         //first, set up next couplet
         //couplets that have any word in l1 in common with the current couplet
@@ -59,13 +59,16 @@
         
         //cplt.l2 = cplt.l2.replace(' ', "&nbsp;");
         options = [cplt_1, cplt_2].filter(c => c != NaN);
+        //test with only cplt_1
+        //options = [cplt_1];
+
         if(options.length == 0){
             options = cplts.filter(c => c.l1 != cplt.l1);
         }
         l_cplt = cplt; //save current couplet
-        l_l1 = l1.innerHTML; //save current l2
+        l_l1 = l1.innerHTML.replaceAll('&nbsp;', '-'); //save current l1
         cplt = options[Math.floor(Math.random() * options.length)];
-        cplt.l2 = cplt.l2.replace(/ /g, "&nbsp;");
+        cplt.l2 = cplt.l2.replace(/ /g, "-");
     
         if(cplt_1.w == cplt.w){
             disp = l2; //dissappear
@@ -77,9 +80,9 @@
             let last_words = l_l1.split(" ");
             let common_words = keep_words.filter(w => last_words.includes(w));
             let common_word = common_words[Math.floor(Math.random() * common_words.length)]
-            let ki = keep_content.indexOf(common_word[0]);
-            let li = l_l1.indexOf(common_word[0]);
-            difference = li-ki;
+            let ki = keep_content.indexOf(common_word);
+            let li = l_l1.indexOf(common_word);
+            let difference = li - ki;
             //add or subtract spaces so word is in same position in keep_content as in l_cplt
             if(difference > 0){
                 keep_content = "-".repeat(difference) + keep_content;
@@ -100,8 +103,11 @@
         setTimeout(function(){ // 1/3 into interval
             disp.visibility = 'hidden'; //hide dissapearing line
             setTimeout(function(){ // 2/3 into interval
-                keep.innerHTML = keep_content; //set keep line content
-                disp.innerHTML = disp_content; //set dissapearing line content
+                //replace dashes with spaces
+                k = keep_content.replaceAll('-', '&nbsp;');
+                d = disp_content.replaceAll('-', '&nbsp;');
+                keep.innerHTML = k; //set keep line content
+                disp.innerHTML = d; //set dissapearing line content
                 setTimeout(function(){ // 3/3 into interval
                     disp.style.visibility = 'visible'; //show dissapearing line
 s                }, interval/4);
