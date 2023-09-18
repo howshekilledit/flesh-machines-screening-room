@@ -6,11 +6,17 @@
     <!-- <link rel="stylesheet" href="css/style.css"> -->
     <script src = "wils.js"></script>
     <style>
+        body{
+            background:black;
+            color:white;
+
+        }
         #text{
             font-family: 'Courier New', Courier, monospace;
             font-size: 20px;
             text-align: left;
             margin-top: 20%;
+            font-weight:bold; 
    
         }
         p{
@@ -25,7 +31,8 @@
         <p id = "l2"></p>
     </div>
     <script>
-        let interval = 8000;
+        console.log(cplts.length);
+        let interval = 10000;
         var cplt = cplts[Math.floor(Math.random() * cplts.length)];
         var text = document.getElementById("text");
         cplt.l2 = cplt.l2.replace(/ /g, "-");
@@ -69,7 +76,7 @@
         l_l1 = l1.innerHTML.replaceAll('&nbsp;', '-'); //save current l1
         cplt = options[Math.floor(Math.random() * options.length)];
         cplt.l2 = cplt.l2.replace(/ /g, "-");
-    
+        let temp_k; //keep_content with common word but everything else is dashes
         if(cplt_1.w == cplt.w){
             disp = l2; //dissappear
             disp_content = s+cplt.l2+s;
@@ -91,6 +98,9 @@
                 keep_content = keep_content.slice(-difference);
                 disp_content = disp_content.slice(-difference);
             }
+            //temp k is keep_content with common word but everything else is dashes
+            let x = keep_content.indexOf(common_word);
+            temp_k = "-".repeat(x) + common_word + "-".repeat(keep_content.length - x - common_word.length);
 
         } else {
             disp = l1;
@@ -106,13 +116,25 @@
                 //replace dashes with spaces
                 k = keep_content.replaceAll('-', '&nbsp;');
                 d = disp_content.replaceAll('-', '&nbsp;');
-                keep.innerHTML = k; //set keep line content
+                if(keep == l1){
+                    temp_k = temp_k.replaceAll('-', '&nbsp;');
+                    keep.innerHTML = temp_k; //set keep line content
+                } else {
+                    keep.innerHTML = k; //set keep line content
+                }
                 disp.innerHTML = d; //set dissapearing line content
                 setTimeout(function(){ // 3/3 into interval
-                    disp.style.visibility = 'visible'; //show dissapearing line
-s                }, interval/4);
-            }, interval/4); 
-        }, interval/4);
+                    if(keep == l1){
+                        keep.innerHTML = k; //set keep line content
+                    } 
+                    setTimeout(function(){
+                        disp.style.visibility = 'visible'; //show dissapearing line
+
+                    }, interval/5);
+
+s                }, interval/5);
+            }, interval/5); 
+        }, interval/5);
 
     }, interval); 
     </script>
