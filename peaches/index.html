@@ -13,6 +13,9 @@
             margin-top: 20%;
             margin-left: 20%;
         }
+        p{
+            margin: 0px;
+        }
         
     </style>
 </head>
@@ -22,19 +25,21 @@
         <p id = "l2"></p>
     </div>
     <script>
-        let interval = 2000;
+        let interval = 4000;
         var cplt = cplts[Math.floor(Math.random() * cplts.length)];
         var text = document.getElementById("text");
         cplt.l2 = cplt.l2.replace(/ /g, "&nbsp;");
         //cplt.l2 = cplt.l2.replace(' ', "&nbsp;");
         let l1 = document.getElementById("l1");
         let l2 = document.getElementById("l2");
-        
-        l1.innerHTML = cplt.l1;
-        l2.innerHTML = cplt.l2;
+        //add n_spaces to each side of l1 and l2 using string literal
+        let n_spaces = 10;
+        let s = "-".repeat(n_spaces);
+        l1.innerHTML = s+cplt.l1+s;
+        l2.innerHTML = s+cplt.l2+s;
         let disp = l2;
     setInterval( function(){
-        
+        //first, set up next couplet
         //couplets that have any word in l1 in common with the current couplet
         let l1_matches = cplts.filter(c => (c.l1.split(" ").some(w => cplt.l1.split(" ").includes(w)) && (c.l1 != cplt.l1) ));
         let cplt_1, cplt_2;
@@ -58,27 +63,50 @@
             options = cplts.filter(c => c.l1 != cplt.l1);
         }
         l_cplt = cplt; //save current couplet
-        
+        l_l1 = l1.innerHTML; //save current l2
         cplt = options[Math.floor(Math.random() * options.length)];
-        if(cplt_1.l1 == cplt.l1){
-            disp = l2;
-            keep = l1; 
+        cplt.l2 = cplt.l2.replace(/ /g, "&nbsp;");
+    
+        if(cplt_1.w == cplt.w){
+            disp = l2; //dissappear
+            disp_content = s+cplt.l2+s;
+            keep = l1;  //continue showing
+            keep_content = s+cplt.l1+s;
+            //update keep content so common word is in same place as l_cplt
+            let keep_words = keep_content.split(" ");
+            let last_words = l_l1.split(" ");
+            let common_words = keep_words.filter(w => last_words.includes(w));
+            let common_word = common_words[Math.floor(Math.random() * common_words.length)]
+            let ki = keep_content.indexOf(common_word[0]);
+            let li = l_l1.indexOf(common_word[0]);
+            difference = li-ki;
+            //add or subtract spaces so word is in same position in keep_content as in l_cplt
+            if(difference > 0){
+                keep_content = "-".repeat(difference) + keep_content;
+                disp_content = "-".repeat(difference) + disp_content;
+            } else if(difference < 0){
+                keep_content = keep_content.slice(-difference);
+                disp_content = disp_content.slice(-difference);
+            }
+
         } else {
             disp = l1;
+            disp_content = s+cplt.l1+s;
             keep = l2;
+            keep_content = s+cplt.l2+s;
         }
-        cplt.l2 = cplt.l2.replace(/ /g, "&nbsp;");
+        disp.style.visibility = 'hidden'; //hide dissappearing line
 
-        setTimeout(function(){
-            l1.innerHTML = cplt.l1;
-            l2.innerHTML = cplt.l2;
-            setTimeout(function(){
-                l1.innerHTML = l_cplt.l1;
-            }, interval/3);
-            disp.style.visibility = 'visible';
-
-        }, interval/3);
-        disp.style.visibility = 'hidden';
+        setTimeout(function(){ // 1/3 into interval
+            disp.visibility = 'hidden'; //hide dissapearing line
+            setTimeout(function(){ // 2/3 into interval
+                keep.innerHTML = keep_content; //set keep line content
+                disp.innerHTML = disp_content; //set dissapearing line content
+                setTimeout(function(){ // 3/3 into interval
+                    disp.style.visibility = 'visible'; //show dissapearing line
+s                }, interval/4);
+            }, interval/4); 
+        }, interval/4);
 
     }, interval); 
     </script>
