@@ -2,11 +2,15 @@
 <!-- saved from url=(0052)https://howshekilledit.com/Slippery_Characters_2020/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
+<style type = 'text/css'>
 
+html. body, video {overflow:hidden;}
+
+</style>
   </head>
   <body>
     <!-- auto play video after 4 seconds -->
-    <video src = 'synthetic_poetry,_escaped_refuse.mp4' width = "100%">
+    <video src = 'synthetic_poetry,_escaped_refuse.mp4' >
 
     </video>
     <script>
@@ -14,6 +18,7 @@
         video.controls = false;
         video.muted = true;
         video.loop = true;
+        video.scroll = false;
         setTimeout(function(){
             video.play();
         }, 4000);
