@@ -32,7 +32,7 @@
     </div>
     <script>
         //remove all entries with capital letters from cplts
-        cplts = cplts.filter(c => c.l1 == c.l1.toLowerCase());
+        cplts = cplts.filter(c => (c.l1 == c.l1.toLowerCase()) && (c.w.indexOf("fag") < 0) && (c.l1.indexOf('fag') < 0));
         console.log(cplts.length);
         let interval = 10000;
         var cplt = cplts[Math.floor(Math.random() * cplts.length)];
